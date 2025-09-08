@@ -10,16 +10,21 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
-  modules: ["shadcn-nuxt", "@vueuse/nuxt", "@nuxt/icon"],
+  modules: ["shadcn-nuxt", "@vueuse/nuxt", "@nuxt/icon", "@nuxt/fonts"],
   shadcn: {
-    /**
-     * Prefix for all the imported component
-     */
     prefix: "",
-    /**
-     * Directory that the component lives in.
-     * @default "./components/ui"
-     */
-    componentDir: "./components/ui",
+    componentDir: "./app/components/ui",
+  },
+  fonts: {
+    defaults: {
+      weights: [100, 200, 300, 400, 500, 600, 700, 800, 900],
+    },
+    families: [
+      { name: "Space Grotesk", provider: "google" },
+      { name: "Space Mono", provider: "google" },
+    ],
+    experimental: {
+      processCSSVariables: true,
+    },
   },
 });
