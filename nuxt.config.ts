@@ -10,7 +10,14 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
 
-  modules: ["shadcn-nuxt", "@vueuse/nuxt", "@nuxt/icon", "@nuxt/fonts"],
+  modules: [
+    "shadcn-nuxt",
+    "@vueuse/nuxt",
+    "@nuxt/icon",
+    "@nuxt/fonts",
+    "@pinia/nuxt",
+    "@pinia/colada-nuxt",
+  ],
   shadcn: {
     prefix: "",
     componentDir: "./app/components/ui",
