@@ -33,6 +33,15 @@ export const useSessionStore = defineStore("session", () => {
   const loading = ref(false);
   const userCookie = useCookie<User | null>(COOKIE_USER_KEY);
 
+  // Derive a normalized role slug from backend userType
+  // Maps: "Administrador" -> "admin", "Cliente" -> "me"
+  const role = computed<"admin" | "me" | null>(() => {
+    const type = session.value?.userType;
+    if (type === "Administrador") return "admin";
+    if (type === "Cliente") return "me";
+    return null;
+  });
+
   const login = async (credentials: { login: string; password: string }) => {
     const { login, password } = credentials;
     loading.value = true;
@@ -63,16 +72,8 @@ export const useSessionStore = defineStore("session", () => {
       //   detail: 'Sesión iniciada correctamente',
       //   life: 3000
       // })
-      const role = response?.data?.user?.userType;
-
-      switch (role) {
-        case "Cliente":
-          navigateTo("/me");
-          break;
-        case "Administrador":
-          navigateTo("/admin");
-          break;
-      }
+      // Navigate based on normalized role
+      if (role.value) navigateTo(`/${role.value}`);
 
       return response;
     } catch (err) {
@@ -151,6 +152,7 @@ export const useSessionStore = defineStore("session", () => {
   return {
     session,
     loading,
+    role,
     login,
     logout,
     recoverSession,
