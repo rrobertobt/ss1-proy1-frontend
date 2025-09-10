@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen gap-12">
-    <header class="flex flex-col items-center ">
+  <div class="flex flex-col items-center justify-center min-h-screen gap-10">
+    <header class="flex flex-col items-center">
       <h1 class="text-3xl font-normal uppercase">INICIAR SESIÓN</h1>
       <Button variant="link" as-child>
         <NuxtLink to="/">
@@ -11,7 +11,7 @@
     </header>
 
     <form @submit="onSubmit" class="w-full max-w-sm space-y-4">
-      <FormField name="email" :form="form">
+      <FormField name="login" :form="form">
         <template #default="{ field }">
           <FormItem>
             <FormControl>
@@ -33,30 +33,43 @@
         </template>
       </FormField>
 
-      <Button type="submit" class="w-full mt-4" :disabled="!form.meta.value.valid" icon="carbon:play"
+      <Button
+        type="submit"
+        class="w-full mt-4"
+        :loading="loading"
+        icon="carbon:play"
         >Continuar
       </Button>
     </form>
+
+    <Button variant="link" as-child>
+      <NuxtLink to="/signup">
+        <Icon name="carbon:user-follow" />
+        ¿No tienes una cuenta? Regístrate
+      </NuxtLink>
+    </Button>
   </div>
 </template>
 <script setup>
-  import { useForm } from "vee-validate";
   import { toTypedSchema } from "@vee-validate/zod";
+  import { useForm } from "vee-validate";
   import * as z from "zod";
   import { Button } from "~/components/ui/button";
   import {
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
-    FormLabel,
     FormMessage,
   } from "~/components/ui/form";
   import { Input } from "~/components/ui/input";
 
+  const sessionStore = useSessionStore();
+  const { login } = sessionStore;
+  const { loading } = storeToRefs(sessionStore);
+
   const formSchema = toTypedSchema(
     z.object({
-      email: z.string().email("Debe ser un correo electrónico válido"),
+      login: z.string(),
       password: z
         .string()
         .min(6, "La contraseña debe tener al menos 6 caracteres"),
@@ -67,8 +80,8 @@
     validationSchema: formSchema,
   });
 
-  const onSubmit = form.handleSubmit((values) => {
-    console.log("Form submitted!", values);
+  const onSubmit = form.handleSubmit(async (values) => {
+    const result = await login(values)
   });
 
   definePageMeta({
