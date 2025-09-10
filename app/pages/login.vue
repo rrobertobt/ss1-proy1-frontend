@@ -36,7 +36,7 @@
       <Button
         type="submit"
         class="w-full mt-4"
-        :disabled="!form.meta.value.valid"
+        :loading="loading"
         icon="carbon:play"
         >Continuar
       </Button>
@@ -69,7 +69,7 @@
 
   const formSchema = toTypedSchema(
     z.object({
-      login: z.string().email("Debe ser un correo electrónico válido"),
+      login: z.string(),
       password: z
         .string()
         .min(6, "La contraseña debe tener al menos 6 caracteres"),
@@ -82,7 +82,6 @@
 
   const onSubmit = form.handleSubmit(async (values) => {
     const result = await login(values)
-    console.log(result)
   });
 
   definePageMeta({

@@ -63,7 +63,16 @@ export const useSessionStore = defineStore("session", () => {
       //   detail: 'Sesión iniciada correctamente',
       //   life: 3000
       // })
-      navigateTo("/me");
+      const role = response?.data?.user?.userType;
+
+      switch (role) {
+        case "Cliente":
+          navigateTo("/me");
+          break;
+        case "Administrador":
+          navigateTo("/admin");
+          break;
+      }
 
       return response;
     } catch (err) {
