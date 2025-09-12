@@ -42,14 +42,14 @@ export const useSessionStore = defineStore("session", () => {
     return null;
   });
 
-  const login = async (credentials: { login: string; password: string }) => {
-    const { login, password } = credentials;
+  const login = async (credentials: { username: string; password: string }) => {
+    const { username, password } = credentials;
     loading.value = true;
     try {
       const { setAccessToken, setRefreshToken } = useNuxtApp().$authCookie;
       const response = await $api<LoginResponse>("/auth/login", {
         method: "POST",
-        body: { login, password },
+        body: { username, password },
       });
 
       // New API shape

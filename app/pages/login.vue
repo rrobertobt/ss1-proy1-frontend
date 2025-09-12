@@ -11,11 +11,11 @@
     </header>
 
     <form @submit="onSubmit" class="w-full max-w-sm space-y-4">
-      <FormField name="login" :form="form">
+      <FormField name="username" :form="form">
         <template #default="{ field }">
           <FormItem>
             <FormControl>
-              <Input v-bind="field" placeholder="Correo electrónico" />
+              <Input v-bind="field" placeholder="Nombre de usuario" />
             </FormControl>
             <FormMessage />
           </FormItem>
@@ -69,7 +69,7 @@
 
   const formSchema = toTypedSchema(
     z.object({
-      login: z.string(),
+      username: z.string(),
       password: z
         .string()
         .min(6, "La contraseña debe tener al menos 6 caracteres"),
