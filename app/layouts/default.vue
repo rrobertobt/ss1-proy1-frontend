@@ -26,13 +26,13 @@
           <!-- Actions -->
           <div class="flex items-center gap-2">
 
-            <NuxtLink to="/profile"
+            <NuxtLink to="/me/profile"
               class="relative p-2 rounded hover:bg-foreground/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 focus-visible:ring-offset-0"
               aria-label="Usuario">
               <Icon name="carbon:user" size="22" />
             </NuxtLink>
 
-            <NuxtLink to="/cart"
+            <NuxtLink to="/me/cart"
               class="relative p-2 rounded hover:bg-foreground/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 focus-visible:ring-offset-0"
               aria-label="Carrito">
               <Icon name="carbon:shopping-cart" size="22" />
@@ -81,7 +81,7 @@ import { ref, onMounted, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
 
 const items = [
-  { to: '/home', label: 'Inicio' },
+  { to: '/', label: 'Inicio' },
   { to: '/catalog', label: 'Catálogo' },
   { to: '/presales', label: 'Preventas' },
   { to: '/events', label: 'Eventos' },
