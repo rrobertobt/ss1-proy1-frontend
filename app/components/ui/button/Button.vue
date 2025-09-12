@@ -31,7 +31,10 @@
     <slot />
     <span
       v-if="icon && !loading"
-      class="bg-brand rounded-full p-2 text-primary border border-primary group-hover:bg-primary group-hover:text-brand transition"
+      :class="{
+        'bg-brand rounded-full p-2 text-primary border border-primary group-hover:bg-primary group-hover:text-brand transition':
+          variant !== 'link',
+      }"
     >
       <Icon :name="icon" class="block!" />
     </span>
