@@ -1,7 +1,7 @@
 <template>
   <div>
     <header
-      class="fixed top-0 left-0 transition right-0 backdrop-blur-sm px-4 py-2.5 text-foreground border-b-2 border-b-foreground/80 flex items-center gap-2"
+      class="fixed top-0 left-0 transition right-0 backdrop-blur-sm px-4 py-2.5 text-foreground border-b-2 border-b-foreground/80 flex items-center gap-2 z-50"
       :class="{
         'bg-brand/100': !hasScrolled,
         'bg-brand/80 shadow-sm': hasScrolled,
