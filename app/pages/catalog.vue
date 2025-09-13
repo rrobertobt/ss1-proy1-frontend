@@ -63,7 +63,7 @@
             <div class="flex flex-col gap-2 p-4 pt-0">
               <button type="button"
                 class="w-full bg-ink text-cream px-4 py-2 text-sm font-semibold tracking-wide disabled:opacity-50"
-                :disabled="addingId === p.id || !p.isAvailable || p.stock_quantity <= 0" @click="handleAdd(p)">
+               >
                 <Icon name="carbon:shopping-cart" size="16" class="mr-2 inline-block" />
                 <span v-if="addedId === p.id">Agregado ✓</span>
                 <span v-else-if="addingId === p.id">Agregando…</span>
